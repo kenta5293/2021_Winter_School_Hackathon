@@ -1,0 +1,172 @@
+@charset "UTF-8";
+
+section.account {
+    overflow: hidden;
+}
+
+.section-account {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 385px;
+    height: 80vh;
+    margin: 0 auto;
+    padding: 3.6rem 2rem 8rem;
+    border-radius: 1.2rem;
+    background-color: #2f2f2f;
+    text-align: center;
+    box-shadow: 0 0 1rem 0.2rem #1f1f1f;
+    user-select: none;
+    animation: openAccount 1.2s forwards;
+}
+
+@keyframes openAccount {
+    0% {
+        transform: translateY(75px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.section-account > .account-title {
+    padding: 2rem;
+    color: #ff9c00;
+    font-family: 'Lemon', cursive;
+    font-size: 4rem;
+    text-align: center;
+    text-shadow: 0.4rem 0rem 0rem #1f1f1f;
+}
+.section-account > .account-text p {
+    padding: 0.2rem;
+    color: #999a9c;
+    font-size: 1.2rem;
+    text-align: center;
+}
+.section-account .form-box {
+    position: relative;
+    width: 100%;
+    margin: 2rem 0;
+}
+.section-account .form-box > input {
+    position: relative;
+    z-index: 11;
+    width: 100%;
+    padding: 1.8rem 1.6rem 0.8rem;
+    border: 0;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 1.4rem;
+    outline: none;
+}
+.section-account .form-box > input::placeholder {
+    color: transparent;
+}
+.section-account .form-box > input[type="password"] {
+    letter-spacing: 0.4rem;
+}
+.section-account .form-box > label {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #999a9c;
+    border-radius: 0.4rem;
+}
+.section-account .form-box > label > span {
+    display: block;
+    position: absolute;
+    top: 0.6rem;
+    padding: 0 1.6rem;
+    color: #999a9c;
+    font-size: 1rem;
+    transition: 0.2s;
+}
+.section-account .form-box > input:placeholder-shown ~ label > span {
+    top: 17.5px;
+    font-size: 1.1rem;
+}
+.section-account .form-box > input:focus ~ label {
+    border-color: #ff9c00;
+} 
+.section-account .form-box > input:focus ~ label > span {
+    top: 0.6rem;
+    color: #ff9c00;
+    font-size: 1rem;
+}
+
+.section-account .account-btn-box {
+    width: 100%;
+    margin: 3.2rem 0 0 0;
+}
+.section-account button[type="submit"],
+.section-account #innerbtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    padding: 1.2rem 0;
+    margin: 0.4rem 0;
+    border: 0;
+    border-radius: 0.4rem;
+    transition: 0.2s;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+}
+.section-account button[type="submit"]:hover,
+.section-account #innerbtn:hover {
+    background-color: #ff9c00;
+}
+.section-account button[type="submit"] > svg,
+.section-account #innerbtn > svg {
+    position: absolute;
+    top: 50%; left: 0;
+    transform: translateY(-50%);
+    height: 18px;
+    margin: 0 0 0 2rem;
+}
+.section-account button[type="submit"] > span,
+.section-account #innerbtn > span {
+    color: #2f2f2f;
+    font-size: 1.2rem;
+}
+.section-account .innerBtn-box {
+    width: 100%;
+    padding: 0.4rem 1.2rem;
+}
+
+.section-account .page-move {
+    display: inline-block;
+    margin: 1.2rem 0;
+    color: #999a9c;
+    font-size: 1.1rem;
+    text-align: center;
+    transition: 0.2s;
+}
+.section-account .page-move:hover {
+    color: #ff9c00;
+}
+@media ( max-height: 700px ) {
+    .section-account {
+        height: auto;
+    }
+}
+@media ( max-width: 576px ) {
+    .section-account {
+        height: auto;
+    }
+    .section-account .form-box > input {
+        font-size: 1.2rem;
+    }
+    .section-account .form-box > input:placeholder-shown ~ label > span {
+        top: 16px;
+    }
+    .section-account .form-box > input:focus ~ label > span {
+        top: 0.6rem;
+        color: #ff9c00;
+        font-size: 1rem;
+    }
+}

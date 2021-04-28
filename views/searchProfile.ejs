@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메서치</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
+</head>
+
+<body>
+    <div id="wrapper">
+        <header id="header" class="header">
+            <div class="set-width header-inner">
+                <div class="logo">
+                    <a href="/">
+                        <img src="/images/logo.png" alt="logo img">
+                    </a>
+                </div>
+                <form action="/search" method="post" name="search" autocomplete="off" class="search-form">
+                    <div class="search-box">
+                        <input type="search" name="searchKeyword" placeholder="캐릭터를 입력해요" required class="search-input">
+                        <input type="submit" value="검색" id="searchSubmit">
+                        <label for="searchSubmit" class="search-button">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path fill="#ffffff" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                            </svg>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </header>
+
+        <section id="section" class="section main">
+            <div class="set-width section-inner section-profile-undefined-width">
+                <% if (message) { %>
+                    <div class="section-devide">
+                        <div id="section-profile-undefined" class="section-user section-profile">
+                            <div class="profile-undefined-img">
+                                <img src="/images/char-undefined.svg" alt="character undefined">
+                            </div>
+                            <p class="profile-undefined-text"><%=message%></p>
+                        </div>
+                    </div>
+                    <% } else { %>
+                        <div class="section-devide" style="flex-shrink: 2;">
+                            <div class="section-user section-profile section-profile-search">
+                                <div class="profile-img">
+                                    <img src="<%= list.imgSrc %>" alt="character img">
+                                </div>
+                            
+                                <div class="profile-content">
+                                    <div class="profile-box">
+                                        <div class="profile-text">
+                                            <img src="<%= list.serverImg %>" alt="server img" class="server-img">
+                                            <span class="server-text"><%= list.serverName %></span>
+                                        </div>
+                                        <div class="profile-text">
+                                            <span><%= list.name %></span>
+                                        </div>
+                                        <div class="profile-text">
+                                            <strong>레벨 </strong>
+                                            <span class="level"><%= list.level %></span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-box">
+                                        <div class="profile-text">
+                                            <strong>직업 </strong>
+                                            <span><%= list.class %></span>
+                                        </div>
+                                        <div class="profile-text popularity-text">
+                                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="svg-inline--fa fa-heart fa-w-16 heart-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                <path fill="#ff4069" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+                                            </svg>
+                                            <span class="popularity"><%= list.popularity %></span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-rank-box">
+                                        <strong>종합랭킹 </strong>
+                                        <span><%= list.allRank %></span>
+                                    </div>
+                                    <div class="profile-rank-box">
+                                        <strong>월드랭킹</strong>
+                                        <span><%= list.worldRank %></span>
+                                    </div>
+                                    <div class="profile-rank-box">
+                                        <strong>직업랭킹</strong>
+                                        <span><%= list.classRank %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-devide section-devide-chart" style="flex-shrink: 1;">
+                            <div class="section-title-box">
+                                <h3 class="section-main-title">Level History</h3>
+                                <p>1주일 마다 갱신 됩니다</p>
+                            </div>
+                            <div class="section-user section-profile section-profile-chart">
+                                <% for(var i = 0; i < list['chart'].length; i++) { %>
+                                    <div class="chart-data">
+                                        <span class="chart-date"><%= list['chart'][i].chartDate %></span>
+                                        <span class="chart-level"><%= list['chart'][i].chartLevel %></span>
+                                    </div>
+                                <% } %>
+                                <canvas id="levelChart" style="width: 100vw; height: 100vh;"></canvas>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </section>
+        <footer id="footer" class="footer">
+            <div class="set-width footer-inner">
+                <p class="copyright">
+                    Copyright © 2021 <strong>메이플은사드세요</strong> All rights reserved
+                </p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        let levelElem = document.getElementsByClassName('level')[0]
+        let popularityElem = document.getElementsByClassName('popularity')[0]
+
+        let level = levelElem.innerHTML;
+        let popularity = popularityElem.innerHTML;
+
+        let levelText = level.substr(3);
+        let popularityText = popularity.substr(3);
+
+        levelElem.innerHTML = levelText;
+        popularityElem.innerHTML = popularityText;
+    </script>
+    <script src="/scripts/jquery-1.12.3.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>
+    <script src="/scripts/chart.js"></script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메서치</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/account.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
+</head>
+<body>
+    <div id="wrapper">
+        <header id="header" class="header">
+            <div class="set-width header-inner">
+                <div class="logo">
+                    <a href="/">
+                        <img src="/images/logo.png" alt="logo img">
+                    </a>
+                </div>
+                <form action="/search" method="post" name="search" autocomplete="off" class="search-form">
+                    <div class="search-box">
+                        <input type="search" name="searchKeyword" placeholder="캐릭터를 입력해요" required class="search-input">
+                        <input type="submit" value="검색" id="searchSubmit">
+                        <label for="searchSubmit" class="search-button">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path fill="#ffffff" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                            </svg>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </header>
+
+        <section id="section" class="section main">
+            <div class="set-width section-inner">
+                <div class="section-devide">
+                    <% if (user) { %>
+                        <div class="section-user section-profile">
+                            <div class="profile-title">
+                                <h2>Hello</h2>
+                                <p><strong><%= user.nickname %>님</strong> 환영합니다</p>
+                            </div>
+                            <div class="profile-img">
+                                <img src="<%= list.imgSrc %>" alt="character img">
+                            </div>
+    
+                            <div class="profile-content">
+                                <div class="profile-box">
+                                    <div class="profile-text">
+                                        <img src="<%= list.serverImg %>" alt="server img" class="server-img">
+                                        <span class="server-text"><%= list.serverName %></span>
+                                    </div>
+                                    <div class="profile-text">
+                                        <span><%= list.name %></span>
+                                    </div>
+                                    <div class="profile-text">
+                                        <strong>레벨 </strong>
+                                        <span class="level"><%= list.level %></span>
+                                    </div>
+                                </div>
+                                <div class="profile-box">
+                                    <div class="profile-text">
+                                        <strong>직업 </strong>
+                                        <span><%= list.class %></span>
+                                    </div>
+                                    <div class="profile-text popularity-text">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" class="svg-inline--fa fa-heart fa-w-16 heart-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="#ff4069" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"></path>
+                                        </svg>
+                                        <span class="popularity"><%= list.popularity %></span>
+                                    </div>
+                                </div>
+                                <div class="profile-rank-box">
+                                    <strong>종합랭킹 </strong>
+                                    <span><%= list.allRank %></span>
+                                </div>
+                                <div class="profile-rank-box">
+                                    <strong>월드랭킹</strong>
+                                    <span><%= list.worldRank %></span>
+                                </div>
+                                <div class="profile-rank-box">
+                                    <strong>직업랭킹</strong>
+                                    <span><%= list.classRank %></span>
+                                </div>
+                            </div>
+    
+                            <a href="/logout" class="logout-btn">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-out-alt" class="svg-inline--fa fa-sign-out-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="#6e6d6e" d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    <% } else { %>
+                        <div class="section-user section-profile-before">
+                            <h2 class="profile-before-title">Welcome</h2>
+                            <div class="profile-img">
+                                <img src="/images/default-avatar.png" alt="character img">
+                            </div>
+                            <div class="profile-before-text">
+                                <p>계정을 생성하여 대표캐릭터를 확인하고</p>
+                                <p>더 많은 서비스를 이용해요</p>
+                            </div>
+                            <div class="profile-before-link">
+                                <button onclick="location.href='/login'">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-in-alt" class="svg-inline--fa fa-sign-in-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <path fill="#2f2f2f" d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"></path>
+                                    </svg>
+                                    <span>로그인</span>
+                                </button>
+                                <button onclick="location.href='/register'">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-plus" class="svg-inline--fa fa-user-plus fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                                        <path fill="#2f2f2f" d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path>
+                                    </svg>
+                                    <span>회원가입</span>
+                                </button>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+                <div class="section-devide">
+                    <div class="section-event">
+                        <div class="section-title-box">
+                            <h3 class="section-main-title">Event</h3>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <% for(var i = 0; i < eventList.length; i++) { %>
+                                    <div class="swiper-slide">
+                                        <div class="slide-box">
+                                            <a href="<%=eventList[i].url%>" target="_blank">
+                                                <div class="slide-box-imgbox">
+                                                    <img src="<%=eventList[i].img%>" alt="event img">
+                                                    <div class="event-hide">
+                                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="mouse-pointer" class="svg-inline--fa fa-mouse-pointer fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                            <path fill="#ffffff" d="M302.189 329.126H196.105l55.831 135.993c3.889 9.428-.555 19.999-9.444 23.999l-49.165 21.427c-9.165 4-19.443-.571-23.332-9.714l-53.053-129.136-86.664 89.138C18.729 472.71 0 463.554 0 447.977V18.299C0 1.899 19.921-6.096 30.277 5.443l284.412 292.542c11.472 11.179 3.007 31.141-12.5 31.141z"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <span><%=eventList[i].name%></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-rank">
+                        <div class="section-title-box">
+                            <h3 class="section-main-title">Ranking</h3>
+                            <p>월드랭킹</p>
+                        </div>
+                        <div class="rank-container">
+                            <ul>
+                                <% for(var i = 0; i < rankList.length; i++) { %>
+                                    <li>
+                                        <div class="left">
+                                            <div class="rank-imgbox">
+                                                <img src="<%= rankList[i].img %>" alt="rank character img">
+                                            </div>
+                                        </div>
+                                        <div class="right">
+                                            <a href="/search/<%= rankList[i].name %>">
+                                                <span><%= i+1 %></span>
+                                                <span class="rank-name">
+                                                    <img src="<%= rankList[i].serverImg %>" alt="server img">
+                                                    <span><%= rankList[i].name %></span>
+                                                </span>
+                                                <span>
+                                                    <span><%= rankList[i].level %></span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-devide">
+                    <% if (user) { %>
+                        <div class="section-todo">
+                            <div class="section-title-box">
+                                <h3 class="section-main-title">To-do List</h3>
+                                <p>메이플에서 뭐 할까</p>
+                            </div>
+                            <div>
+                                <% if ( todoList.todoList != "" ) { %>
+                                <div class="section-todo-list">
+                                    <ul>
+                                        <% todoList.todoList.forEach((todo, i) => { %>
+                                            <li>
+                                                <div>
+                                                    <div>
+                                                        <p class="todo-text todo-num"><%= (i+1) %></p>
+                                                        <div>
+                                                            <p class="todo-text todo-title"><%= todo.title %></p>
+                                                            <p class="todo-text todo-content"><%= todo.content %></p>
+                                                        </div>
+                                                    </div>
+                                                    <p class="todo-date"><%= todo.createYear %>년 <%= todo.createMonth %>월 <%= todo.createDay %>일</p>
+                                                </div>
+                                                <form action="/delTodo/<%= todo._id %>?_method=DELETE" method="post">
+                                                    <button class="todo-delete-btn">
+                                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="eraser" class="svg-inline--fa fa-eraser fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#6a6a6a" d="M497.941 273.941c18.745-18.745 18.745-49.137 0-67.882l-160-160c-18.745-18.745-49.136-18.746-67.883 0l-256 256c-18.745 18.745-18.745 49.137 0 67.882l96 96A48.004 48.004 0 0 0 144 480h356c6.627 0 12-5.373 12-12v-40c0-6.627-5.373-12-12-12H355.883l142.058-142.059zm-302.627-62.627l137.373 137.373L265.373 416H150.628l-80-80 124.686-124.686z"></path></svg>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        <% }); %>
+                                    </ul>
+                                </div>
+                                <% } else { %>
+                                    <div class="todo-list-undefined">
+                                        <p>계획을 작성해 보세요</p>
+                                    </div>
+                                <% } %> 
+
+                                <form action="/addTodo" method="post" name="addtodo" autocomplete="off">
+                                    <div>
+                                        <input type="text" name="todoTitle" id="todo-title" placeholder="제목" required>
+                                        <input type="text" name="todoContent" id="todo-content" placeholder="내용" required>
+                                    </div>
+                                    <button type="submit">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pen-alt" class="svg-inline--fa fa-pen-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="#ffffff" d="M497.94 74.17l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.75 18.75-49.15 0-67.91zm-246.8-20.53c-15.62-15.62-40.94-15.62-56.56 0L75.8 172.43c-6.25 6.25-6.25 16.38 0 22.62l22.63 22.63c6.25 6.25 16.38 6.25 22.63 0l101.82-101.82 22.63 22.62L93.95 290.03A327.038 327.038 0 0 0 .17 485.11l-.03.23c-1.7 15.28 11.21 28.2 26.49 26.51a327.02 327.02 0 0 0 195.34-93.8l196.79-196.79-82.77-82.77-84.85-84.85z"></path>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div id="section-todo-undefined" class="section-user section-todo">
+                            <div class="section-title-box">
+                                <h3 class="section-main-title">To-do List</h3>
+                                <p>메이플에서 뭐 할까</p>
+                            </div>
+                            <div>
+                                <div class="section-todo-img">
+                                    <img src="/images/login-undefined.svg" alt="login session undefined">
+                                </div>
+                                <p class="section-todo-text">로그인 후 이용가능합니다</p>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </section>
+        <footer id="footer" class="footer">
+            <div class="set-width footer-inner">
+                <p class="copyright">
+                    Copyright © 2021 <strong>메이플은사드세요</strong> All rights reserved
+                </p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        let levelElem = document.getElementsByClassName('level')[0]
+        let popularityElem = document.getElementsByClassName('popularity')[0]
+
+        let level = levelElem.innerHTML;
+        let popularity = popularityElem.innerHTML;
+
+        let levelText = level.substr(3);
+        let popularityText = popularity.substr(3);
+
+        levelElem.innerHTML = levelText;
+        popularityElem.innerHTML = popularityText;
+    </script>
+    <script src="/scripts/jquery-1.12.3.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="/scripts/main.js"></script>
+</body>
+</html>

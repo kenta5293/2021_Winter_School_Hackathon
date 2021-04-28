@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메서치</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/account.css">
+    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
+</head>
+<body>
+    <div id="wrapper">
+        <header id="header" class="header">
+            <div class="set-width header-inner">
+                <div class="logo">
+                    <a href="/">
+                        <img src="/images/logo.png" alt="logo img">
+                    </a>
+                </div>
+                <form action="/search" method="post" name="search" autocomplete="off" class="search-form">
+                    <div class="search-box">
+                        <input type="search" name="searchKeyword" placeholder="캐릭터를 입력해요" required class="search-input">
+                        <input type="submit" value="검색" id="searchSubmit">
+                        <label for="searchSubmit" class="search-button">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path fill="#ffffff" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                            </svg>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </header>
+
+        <section id="section" class="section account">
+            <div class="section-inner">
+                <div class="section-account section-login">                        
+                    <h2 class="account-title">Login</h2>
+                    <div class="account-text">
+                        <p>로그인을 진행하여</p>
+                        <p>자신의 대표캐릭터를 확인해봐요</p>
+                    </div>
+                    <form action="/login" method="post" name="login" autocomplete="off">
+                        <div class="form-box">
+                            <input type="text" name="id" id="id" placeholder="아이디" required>
+                            <label for="id">
+                                <span>아이디</span>
+                            </label>
+                        </div>
+                        <div class="form-box">
+                            <input type="password" name="password" id="password" placeholder="비밀번호" required>
+                            <label for="password">
+                                <span>비밀번호</span>
+                            </label>
+                        </div>
+                        <% if (message) { %>
+                            <script>
+                                alert('<%= message %>')
+                            </script>
+                        <% } %>
+                        <div class="account-btn-box">
+                            <button type="submit">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-in-alt" class="svg-inline--fa fa-sign-in-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="#2f2f2f" d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"></path>
+                                </svg>
+                                <span>로그인</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    
+                    <a href="/register" class="page-move">계정 만들러가기</a>
+                </div>
+            </div>
+        </section>
+        <footer id="footer" class="footer">
+            <div class="set-width footer-inner">
+                <p class="copyright">
+                    Copyright © 2021 <strong>메이플은사드세요</strong> All rights reserved
+                </p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메서치</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/account.css">
+    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
+</head>
+<body>
+    <div id="wrapper">
+        <header id="header" class="header">
+            <div class="set-width header-inner">
+                <div class="logo">
+                    <a href="/">
+                        <img src="/images/logo.png" alt="logo img">
+                    </a>
+                </div>
+                <form action="/search" method="post" name="search" autocomplete="off" class="search-form">
+                    <div class="search-box">
+                        <input type="search" name="searchKeyword" placeholder="캐릭터를 입력해요" required class="search-input">
+                        <input type="submit" value="검색" id="searchSubmit">
+                        <label for="searchSubmit" class="search-button">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path fill="#ffffff" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                            </svg>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </header>
+
+        <section id="section" class="section account">
+            <div class="section-inner">
+                <div class="section-account section-login">                        
+                    <h2 class="account-title">Register</h2>
+                    <div class="account-text">
+                        <p>회원가입을 진행하여 </p>
+                        <p>더 많은 서비스를 이용해봐요</p>
+                    </div>
+                    <form action="/register" method="post" name="register" onsubmit="return returnForm();" autocomplete="off">
+                        <div class="form-box">
+                            <input type="text" name="id" id="id" placeholder="아이디" required>
+                            <label for="id">
+                                <span>아이디</span>
+                            </label>
+                        </div>
+                        <div class="form-box">
+                            <input type="password" name="password" id="password" placeholder="비밀번호" required>
+                            <label for="password">
+                                <span>비밀번호</span>
+                            </label>
+                        </div>
+                        <div class="form-box">
+                            <input type="text" name="name" id="name" placeholder="이름" required>
+                            <label for="name">
+                                <span>이름</span>
+                            </label>
+                        </div>
+                        <div class="form-box">
+                            <input type="text" name="nickname" id="nickname" placeholder="닉네임" required>
+                            <label for="name">
+                                <span>닉네임</span>
+                            </label>
+                        </div>
+                        <div class="form-box">
+                            <input type="text" name="charnick" id="searchKeywordValue" placeholder="캐릭터이름" required>
+                            <label for="searchKeywordValue">
+                                <span>캐릭터이름</span>
+                            </label>
+                            <input type="hidden" name="charnickCheck" required>
+                            <div class="innerBtn-box">
+                                <button type="button" id="innerbtn" onclick="listViewUser(document.getElementById('searchKeywordValue').value)">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                        <path fill="#2f2f2f" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                                    </svg>
+                                    <span>캐릭터확인</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="account-btn-box">
+                            <button type="submit">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-plus" class="svg-inline--fa fa-user-plus fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                                    <path fill="#2f2f2f" d="M624 208h-64v-64c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v64h-64c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h64v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-64h64c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm-400 48c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path>
+                                </svg>
+                                <span>회원가입</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <footer id="footer" class="footer">
+            <div class="set-width footer-inner">
+                <p class="copyright">
+                    Copyright © 2021 <strong>메이플은사드세요</strong> All rights reserved
+                </p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        const userNameValue = register.charnick.value;
+        
+        const getUser = (userName) => {
+            return fetch(`http://localhost:8000/search/list/${userName}`, {
+                'method': 'GET',
+                'header': {
+                    'Content=Type': 'application/json'
+                }
+            }).then(res => res)
+                .then(res => res.json());
+        }
+
+        const viewUser = (userNameValue) => {
+            const innerElem = document.getElementById('sync-user-text');
+            if (!userNameValue[0]) {
+                alert('캐릭터가 없거나 생성된지 얼마 안됬나요?');
+                register.charnick.value = '';
+                register.charnickCheck.value = 'X';
+            } else {
+                alert(`${userNameValue[0]['name']} / ${userNameValue[0]['level']} 캐릭터가 맞나요?`);
+                register.charnickCheck.value = 'O';
+            }
+        }
+
+        const listViewUser = async (userName) => {
+            const listViewUsers = await getUser(userName);
+            console.log(listViewUsers)
+            viewUser(listViewUsers);
+        };
+
+
+        function returnForm() {
+            if(register.charnickCheck.value == 'X' || register.charnickCheck.value == "") {
+                register.charnick.value = '';
+                alert('캐릭터 확인을 해주세요.');
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
